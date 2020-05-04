@@ -15,7 +15,7 @@ window.Booking = {
     displayAppointments: function (appointments) {
         let appointmentsHtml = '';
 
-        appointments.forEach(appointment => appointmentsHtml += Booking.getHtmlForOneAppointment(appointment))
+        appointments.forEach(appointment => appointmentsHtml += Booking.getHtmlForOneAppointment(appointment));
 
         $("#appointments-table tbody").html(appointmentsHtml);
     },
@@ -32,7 +32,58 @@ window.Booking = {
             <td>${appointment.treatment}</td>
             <td>${appointment.recommendations}</td>
         </tr>`;
+    },
+
+    createAppointment: function () {
+
+        let dateValue = new Date($("#date").val());
+        let year = dateValue.getFullYear();
+        let month = dateValue.getMonth();
+        let day = dateValue.getDate();
+
+        let timeValue = $("#time").val();
+        let time = timeValue.split(':');
+        let hours = parseInt(time[0]);
+        let minutes = parseInt(time[1]);
+
+        let timeDate = new Date(year, month, day, hours + 3, minutes);
+
+        let requestBody = {
+            doctorId: 7,
+            patientId: 13,
+            appointmentDate: timeDate,
+            symptoms: "insomnia"
+        };
+
+        $.ajax({
+            url: Booking.API_URL + "/appointments",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(requestBody)
+        }).done(function () {
+            Booking.getAppointments();
+        })
+
+    },
+
+    bindEvents: function () {
+        $("#submit-button").on("click", function (event) {
+            event.preventDefault();
+            // let dateValue = ($("#date").val());
+            // let timeValue = ($("#time").val());
+            // console.log(dateValue,"cucu", timeValue);
+            // if (dateValue != null && timeValue != null) {
+            Booking.createAppointment();
+            alert("Appointment request created.");
+            // Booking.getAppointments();
+            // } else {
+
+            // alert("You entered invalid date.");
+
+            // }
+        });
     }
 };
 
 Booking.getAppointments();
+Booking.bindEvents();

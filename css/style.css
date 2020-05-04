@@ -10,14 +10,14 @@ body {
 }
 
 a {
-    color: #A52A2A;
+    color: #0e857b;
     transition: 0.5s;
 }
 
 a:hover,
 a:active,
 a:focus {
-    color: #540000;
+    color: #050353;
     outline: none;
     text-decoration: none;
 }
@@ -42,7 +42,7 @@ h6 {
 .back-to-top {
     position: fixed;
     display: none;
-    background: #A52A2A;
+    background: #0e857b;
     color: #fff;
     width: 44px;
     height: 44px;
@@ -62,7 +62,7 @@ h6 {
 }
 
 .back-to-top:hover {
-    background: #540000;
+    background: #050353;
 }
 
 /* ================================================= */
@@ -118,7 +118,7 @@ h6 {
 .top-header h1 {
     font-size: 90px;
     font-weight: 900;
-    color: #A52A2A;
+    color: #0e857b;
     letter-spacing: 10px;
     text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
@@ -144,7 +144,7 @@ h6 {
 }
 
 .top-header .btn {
-    background: #A52A2A;
+    background: #0e857b;
     color: #fff;
     font-weight: 700;
     padding: 15px 30px;
@@ -153,7 +153,7 @@ h6 {
 }
 
 .top-header .btn:hover {
-    background: #540000;
+    background: #050353;
 }
 
 .top-header .btn:focus {
@@ -217,7 +217,7 @@ h6 {
 .banner-header h1 {
     font-size: 90px;
     font-weight: 900;
-    color: #A52A2A;
+    color: #0e857b;
     letter-spacing: 10px;
     text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
@@ -259,10 +259,10 @@ h6 {
 #header {
     font-family: 'Nunito', sans-serif;
     position: relative;
-    background: #A52A2A;
+    background: #0e857b;
     height: 70px;
     text-align: center;
-    border-bottom: 1px solid #540000;
+    border-bottom: 1px solid #050353;
 }
 
 @media (max-width: 767.98px) {
@@ -346,7 +346,7 @@ h6 {
 .nav-menu li:hover > a,
 .nav-menu .menu-active > a {
     color: #ffffff;
-    background: #540000;
+    background: #050353;
 }
 
 .nav-menu ul {
@@ -365,7 +365,7 @@ h6 {
 }
 
 .nav-menu ul li:hover {
-    background: #540000;
+    background: #050353;
 }
 
 .nav-menu ul li a {
@@ -392,7 +392,7 @@ h6 {
     margin: 10px 10px 0 0;
     padding: 10px 12px;
     border: 0;
-    background: #A52A2A;
+    background: #0e857b;
     border-radius: 30px;
     font-size: 24px;
     line-height: 1px;
@@ -474,11 +474,11 @@ h6 {
 }
 
 #mobile-nav ul .menu-has-children i.fa-chevron-up {
-    color: #A52A2A;
+    color: #0e857b;
 }
 
 #mobile-nav ul .menu-item-active {
-    color: #A52A2A;
+    color: #0e857b;
 }
 
 #mobile-body-overly {
@@ -511,7 +511,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .section-header h3 {
     position: relative;
     text-align: center;
-    color: #A52A2A;
+    color: #0e857b;
     font-size: 45px;
     text-transform: capitalize;
     font-weight: 900;
@@ -528,7 +528,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     height: 7px;
     bottom: 1px;
     left: calc(50% - 30px);
-    background: #A52A2A;
+    background: #0e857b;
     border-radius: 5px;
 }
 
@@ -603,7 +603,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #about h4 {
     margin: 30px 0 15px 0;
-    color: #A52A2A;
+    color: #0e857b;
     font-weight: 800;
     letter-spacing: 2px;
 }
@@ -629,12 +629,12 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin: 10px 0 0 0;
     padding: 8px 30px;
     color: #ffffff;
-    background: #A52A2A;
+    background: #0e857b;
     border-radius: 30px;
 }
 
 #about .about-col-right a:hover {
-    background: #540000;
+    background: #050353;
 }
 
 #about .about-col {
@@ -700,7 +700,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #services .single-service h4 {
-    color: #A52A2A;
+    color: #0e857b;
     font-size: 16px;
     font-weight: 800;
     line-height: 24px;
@@ -723,16 +723,16 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin: 10px 0 0 0;
     padding: 7px 30px;
     color: #ffffff;
-    background: #A52A2A;
+    background: #0e857b;
     border-radius: 30px;
 }
 
 #services .single-service:hover a {
-    background: #540000;
+    background: #050353;
 }
 
 #services .single-service a:hover {
-    background: #A52A2A;
+    background: #0e857b;
 }
 
 #services .single-service .icon {
@@ -839,7 +839,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #team h4 {
     margin: 20px 0 0 0;
-    color: #A52A2A;
+    color: #0e857b;
     font-weight: 800;
     letter-spacing: 2px;
 }
@@ -863,111 +863,111 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .box8 .icon li a {
     color: #ffffff;
-    background: #A52A2A;
+    background: #0e857b;
 }
 
 .box8 .icon li a:hover {
     color: #ffffff;
-    background: #540000;
+    background: #050353;
 }
 
 /* ================================================= */
 /* ------------- Testimonials Section -------------- */
 /* ================================================= */
 
-#testimonials {
-    background: url("../img/testimonial-bg.jpg") center top no-repeat fixed;
-    background-size: cover;
-    padding: 55px 0;
-    text-align: center;
-    position: relative;
-}
+/*#testimonials {*/
+/*    background: url("../img/testimonial-bg.jpg") center top no-repeat fixed;*/
+/*    background-size: cover;*/
+/*    padding: 55px 0;*/
+/*    text-align: center;*/
+/*    position: relative;*/
+/*}*/
 
-#testimonials::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background: rgba(256, 256, 256, 0.8);
-}
+/*#testimonials::before {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    top: 0;*/
+/*    bottom: 0;*/
+/*    background: rgba(256, 256, 256, 0.8);*/
+/*}*/
 
-#testimonials .container {
-    position: relative;
-    max-width: 900px;
-    z-index: 9;
-}
+/*#testimonials .container {*/
+/*    position: relative;*/
+/*    max-width: 900px;*/
+/*    z-index: 9;*/
+/*}*/
 
-#testimonials i {
-    color: #A52A2A;
-    font-style: italic;
-}
+/*#testimonials i {*/
+/*    color: #0e857b;*/
+/*    font-style: italic;*/
+/*}*/
 
-#testimonials .testimonial-item {
-    padding: 0 0 15px 0;
-    text-align: left;
-}
+/*#testimonials .testimonial-item {*/
+/*    padding: 0 0 15px 0;*/
+/*    text-align: left;*/
+/*}*/
 
-@media (max-width: 575.98px) {
-    #testimonials .testimonial-item {
-        text-align: center;
-    }
-}
+/*@media (max-width: 575.98px) {*/
+/*    #testimonials .testimonial-item {*/
+/*        text-align: center;*/
+/*    }*/
+/*}*/
 
-#testimonials .img,
-#testimonials .content {
-    position: relative;
-    top: 50%;
-    -moz-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
+/*#testimonials .img,*/
+/*#testimonials .content {*/
+/*    position: relative;*/
+/*    top: 50%;*/
+/*    -moz-transform: translateY(-50%);*/
+/*    -webkit-transform: translateY(-50%);*/
+/*    transform: translateY(-50%);*/
+/*}*/
 
-#testimonials .testimonial-item .testimonial-img {
-    width: 100%;
-    border-radius: 6px;
-}
+/*#testimonials .testimonial-item .testimonial-img {*/
+/*    width: 100%;*/
+/*    border-radius: 6px;*/
+/*}*/
 
-#testimonials .testimonial-item h3 {
-    font-size: 22px;
-    font-weight: 800;
-    margin-bottom: 5px;
-    color: #A52A2A;
-}
+/*#testimonials .testimonial-item h3 {*/
+/*    font-size: 22px;*/
+/*    font-weight: 800;*/
+/*    margin-bottom: 5px;*/
+/*    color: #0e857b;*/
+/*}*/
 
-#testimonials .testimonial-item h4 {
-    color: #757575;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
+/*#testimonials .testimonial-item h4 {*/
+/*    color: #757575;*/
+/*    font-size: 16px;*/
+/*    font-weight: 700;*/
+/*    margin-bottom: 20px;*/
+/*}*/
 
-#testimonials .testimonial-item p {
-    color: #666666;
-    font-style: italic;
-    font-weight: 400;
-    margin: 0;
-}
+/*#testimonials .testimonial-item p {*/
+/*    color: #666666;*/
+/*    font-style: italic;*/
+/*    font-weight: 400;*/
+/*    margin: 0;*/
+/*}*/
 
-#testimonials .owl-nav,
-#testimonials .owl-dots {
-    margin-top: 5px;
-    text-align: center;
-}
+/*#testimonials .owl-nav,*/
+/*#testimonials .owl-dots {*/
+/*    margin-top: 5px;*/
+/*    text-align: center;*/
+/*}*/
 
-#testimonials .owl-dot {
-    display: inline-block;
-    margin: 0 5px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #A52A2A;
-}
+/*#testimonials .owl-dot {*/
+/*    display: inline-block;*/
+/*    margin: 0 5px;*/
+/*    width: 12px;*/
+/*    height: 12px;*/
+/*    border-radius: 50%;*/
+/*    background: #0e857b;*/
+/*}*/
 
-#testimonials .owl-dot.active {
-    background: #540000;
-}
+/*#testimonials .owl-dot.active {*/
+/*    background: #050353;*/
+/*}*/
 
 /* ================================================= */
 /* ----------------- Booking Style ----------------- */
@@ -999,7 +999,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #booking .booking-form input:focus,
 #booking .booking-form textarea:focus {
-    border: 1px solid #A52A2A;
+    border: 1px solid #0e857b;
 }
 
 #booking .booking-form button[type="submit"] {
@@ -1007,14 +1007,14 @@ body.mobile-nav-active #mobile-nav-toggle {
     border: none;
     padding: 8px 30px 10px 30px;
     color: #ffffff;
-    background: #A52A2A;
+    background: #0e857b;
     transition: 0.4s;
     cursor: pointer;
     border-radius: 30px;
 }
 
 #booking .booking-form button[type="submit"]:hover {
-    background: #540000;
+    background: #050353;
 }
 
 /* ================================================= */
@@ -1036,7 +1036,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #contact .contact-detail {
     padding: 25px 30px;
-    background: #A52A2A;
+    background: #0e857b;
     border-radius: 6px;
     box-shadow: 0 0 0 0px #fff inset, 0 0 3px 0 rgba(000, 000, 000, 0.6);
 }
@@ -1067,7 +1067,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #contact .contact-detail a:hover {
-    color: #540000;
+    color: #050353;
 }
 
 #contact .contact-form {
@@ -1087,7 +1087,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #contact .contact-form input:focus,
 #contact .contact-form textarea:focus {
-    border: 1px solid #A52A2A;
+    border: 1px solid #0e857b;
 }
 
 #contact .contact-form button[type="submit"] {
@@ -1095,14 +1095,14 @@ body.mobile-nav-active #mobile-nav-toggle {
     border: none;
     padding: 8px 30px 10px 30px;
     color: #ffffff;
-    background: #A52A2A;
+    background: #0e857b;
     transition: 0.4s;
     cursor: pointer;
     border-radius: 30px;
 }
 
 #contact .contact-form button[type="submit"]:hover {
-    background: #540000;
+    background: #050353;
 }
 
 /* ================================================= */
@@ -1134,12 +1134,12 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #login .form input:focus {
-	border: 1px solid #A52A2A;
+	border: 1px solid #0e857b;
 }
 
 #login .form button[type="submit"] {
     border: none;
-    background: #A52A2A;
+    background: #0e857b;
     padding: 9px 30px;
     color: #ffffff;
     transition: 0.4s;
@@ -1148,7 +1148,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #login .form button[type="submit"]:hover {
-    background: #540000;
+    background: #050353;
 }
 
 .custom-control-label:before{
@@ -1158,14 +1158,14 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .custom-radio .custom-control-input:checked~.custom-control-label::before,
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background: #A52A2A;
-    border: 1px solid #A52A2A;
+    background: #0e857b;
+    border: 1px solid #0e857b;
 }
 
 .custom-radio .custom-control-input:focus~.custom-control-label::before,
 .custom-checkbox .custom-control-input:focus~.custom-control-label::before {
     box-shadow: none;
-    border: 1px solid #A52A2A;
+    border: 1px solid #0e857b;
 }
 
 /* ================================================= */
@@ -1175,7 +1175,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 #subscriber {
     position: relative;
     padding: 30px 0;
-    background: #A52A2A;
+    background: #0e857b;
     text-align: center;
 }
 
@@ -1209,7 +1209,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     border: none;
     box-shadow: none;
     padding: 8px 30px;
-    color: #A52A2A;
+    color: #0e857b;
     font-weight: 600;
     letter-spacing: 1px;
     background: #ffffff;
@@ -1220,7 +1220,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #subscriber button[type="submit"]:hover {
     color: #ffffff;
-    background: #540000;
+    background: #050353;
 }
 
 /* ================================================= */
@@ -1229,7 +1229,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #support {
     position: relative;
-    background: #540000;
+    background: #050353;
     text-align: center
 }
 
@@ -1270,5 +1270,5 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #footer .copyright a:hover {
-    color: #A52A2A;
+    color: #0e857b;
 }
