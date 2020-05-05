@@ -1,3 +1,9 @@
+window.Login = {
+    API_URL: "http://localhost:8084",
+
+
+};
+
 window.Booking = {
 
     API_URL: "http://localhost:8084",
@@ -71,10 +77,11 @@ window.Booking = {
             event.preventDefault();
             // let dateValue = ($("#date").val());
             // let timeValue = ($("#time").val());
-            // console.log(dateValue,"cucu", timeValue);
+            // console.log(dateValue," ", timeValue);
             // if (dateValue != null && timeValue != null) {
             Booking.createAppointment();
             alert("Appointment request created.");
+            location.reload(true);
             // Booking.getAppointments();
             // } else {
 
