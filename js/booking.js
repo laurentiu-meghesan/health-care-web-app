@@ -1,16 +1,12 @@
-window.Login = {
-    API_URL: "http://localhost:8084",
-
-
-};
-
 window.Booking = {
 
     API_URL: "http://localhost:8084",
 
     getAppointments: function () {
+        patientId = 13;
+
         $.ajax({
-            url: Booking.API_URL + "/appointments/patientId=13",
+            url: Booking.API_URL + "/appointments/patientId=" + patientId,
             method: "GET"
         }).done(function (response) {
             console.log(response);
@@ -56,7 +52,7 @@ window.Booking = {
 
         let requestBody = {
             doctorId: 7,
-            patientId: 13,
+            patientId: patientId,
             appointmentDate: timeDate,
             symptoms: "insomnia"
         };
@@ -80,13 +76,13 @@ window.Booking = {
             // console.log(dateValue," ", timeValue);
             // if (dateValue != null && timeValue != null) {
             Booking.createAppointment();
-            alert("Appointment request created.");
+            alert('Appointment request created.');
             location.reload(true);
             // Booking.getAppointments();
             // } else {
-
+            //
             // alert("You entered invalid date.");
-
+            //
             // }
         });
     }

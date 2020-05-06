@@ -57,6 +57,7 @@
                         <li><a href="booking.html">Booking</a></li>
                         <li class="menu-active"><a href="login.html">Login</a></li>
                         <li><a href="contact.html">Contact</a></li>
+                        <li><a href="profile.html">Profile</a></li>
                     </ul>
                 </nav>
             </div>
@@ -76,18 +77,18 @@
 							<form>
 								<div class="form-row">
 									<div class="form-group col-md-6">
-										<input type="text" class="form-control" placeholder="Your Name" />
+										<input type="text" id="username-signup" class="form-control" placeholder="Username" />
 									</div>
 									<div class="form-group col-md-6">
-										<input type="email" class="form-control" placeholder="Your Email" />
+										<input type="email" id="email-signup" class="form-control" placeholder="Your Email" />
 									</div>
 								</div>
 								<div class="form-row">
 									<div class="form-group col-md-6">
-										<input type="password" class="form-control" placeholder="Your Password" />
+										<input type="password" id="pass-signup" class="form-control" placeholder="Your Password" />
 									</div>
 									<div class="form-group col-md-6">
-										<input type="Password" class="form-control" placeholder="Repeat Your Password" />
+										<input type="Password" id="pass2-signup" class="form-control" placeholder="Repeat Your Password" />
 									</div>
 								</div>
 								<div class="form-group">
@@ -96,14 +97,14 @@
 										<label class="custom-control-label" for="remember1">Remember me</label>
 									</div>
 								</div>
-								<div><button type="submit">Sing Up</button></div>
+								<div><button id="sign-up" type="submit">Sing Up</button></div>
 							</form>
 						</div>
 						
 						<div class="col-md-6 form">
 							<form>
 								<div class="form-group">
-									<input type="email" class="form-control" placeholder="Your Email" />
+									<input type="email" class="form-control" placeholder="Username" />
 								</div>
 								<div class="form-group">
 									<input type="password" class="form-control" placeholder="Your Password" />
@@ -153,6 +154,7 @@
 
         <!-- Main Javascript File -->
         <script src="js/main.js"></script>
+        <script src="js/login.js"></script>
 
     </body>
 </html>
