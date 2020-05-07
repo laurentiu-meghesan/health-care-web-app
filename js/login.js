@@ -1,10 +1,11 @@
 var patientId = null;
 var doctorID = null;
+
 var userId = null;
-var firstName = null;
-var lastName = null;
-var phoneNumber = null;
-var birthDate = null;
+var firstNameInput = null;
+var lastNameInput = null;
+var phoneNumberInput = null;
+var birthDateInput = null;
 
 window.Login = {
     API_URL: "http://localhost:8084",
@@ -30,10 +31,10 @@ window.Login = {
             alert("User created. Now we need a few more information to complete your profile.");
             userId = event.id;
 
-            firstName = prompt("Please enter your First Name:");
-            lastName = prompt("Please enter your Last Name:");
-            phoneNumber = prompt("Now enter your Phone Number:", "Ex: 074xxxxxxx");
-            birthDate = prompt("Enter your birthday:", "Ex: MM.DD.YYYY");
+            firstNameInput = prompt("Please enter your First Name:");
+            lastNameInput = prompt("Please enter your Last Name:");
+            phoneNumberInput = prompt("Now enter your Phone Number:", "Ex: 074xxxxxxx");
+            birthDateInput = prompt("Enter your birthday:", "Ex: MM.DD.YYYY");
 
             Login.createProfile();
             alert("Profile Updated! Now try to Sign In.");
@@ -43,14 +44,14 @@ window.Login = {
 
     createProfile: function () {
 
-        let birthday = new Date(birthDate);
+        let birthday = new Date(birthDateInput);
         birthday.setDate(birthday.getDate() + 1);
 
         let requestBody = {
             profileId: userId,
-            firstName: firstName,
-            lastName: lastName,
-            phoneNumber: phoneNumber,
+            firstName: firstNameInput,
+            lastName: lastNameInput,
+            phoneNumber: phoneNumberInput,
             birthDate: birthday
         };
 
