@@ -3,7 +3,7 @@ window.Booking = {
     API_URL: "http://localhost:8084",
 
     getAppointments: function () {
-        patientId = 13;
+        let patientId = localStorage.getItem("loggedUserId");
 
         $.ajax({
             url: Booking.API_URL + "/appointments/patientId=" + patientId,
@@ -37,6 +37,8 @@ window.Booking = {
     },
 
     createAppointment: function () {
+
+        let patientId = parseInt(localStorage.getItem("loggedUserId"));
 
         let dateValue = new Date($("#date").val());
         let year = dateValue.getFullYear();
@@ -76,8 +78,9 @@ window.Booking = {
             // console.log(dateValue," ", timeValue);
             // if (dateValue != null && timeValue != null) {
             Booking.createAppointment();
+            console.log(event);
             alert('Appointment request created.');
-            location.reload(true);
+            // location.reload(true);
             // Booking.getAppointments();
             // } else {
             //

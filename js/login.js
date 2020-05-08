@@ -1,4 +1,3 @@
-var patientId = null;
 var doctorID = null;
 
 var userId = null;
@@ -6,6 +5,8 @@ var firstNameInput = null;
 var lastNameInput = null;
 var phoneNumberInput = null;
 var birthDateInput = null;
+
+var loggedUserId = null;
 
 window.Login = {
     API_URL: "http://localhost:8084",
@@ -67,6 +68,24 @@ window.Login = {
         })
     },
 
+    getLoggedInUser: function () {
+
+        let loggedUserName = $('#username-login').val();
+        console.log(loggedUserName);
+        let loggedPassword = $('#pass-login').val();
+        console.log(loggedPassword);
+
+        $.ajax({
+            url: Login.API_URL + "/profiles/userName&password?password=" + loggedPassword + "&userName=" +loggedUserName,
+            method: "GET"
+        }).done(function (response) {
+            console.log(response);
+            loggedUserId = parseInt(response.id);
+            localStorage.setItem("loggedUserId", loggedUserId);
+            console.log("Logged user id = " + loggedUserId);
+        })
+    },
+
     bindEvents: function () {
         $('#sign-up').on('click', function (event) {
 
@@ -80,6 +99,12 @@ window.Login = {
             } else {
                 Login.createUser();
             }
+        });
+
+        $('#log-in').on('click', function (event) {
+
+            event.preventDefault();
+            Login.getLoggedInUser();
         })
     }
 };
