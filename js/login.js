@@ -1,12 +1,19 @@
 var doctorID = null;
 
+//variables for create profile method
 var userId = null;
 var firstNameInput = null;
 var lastNameInput = null;
 var phoneNumberInput = null;
 var birthDateInput = null;
 
-var loggedUserId = null;
+//variables for loggen in user
+var loggedUserId = localStorage.getItem("loggedUserId");
+var loggedUserIsDoctor = localStorage.getItem("loggedUserIsDoctor");
+var loggedFirstName = localStorage.getItem("loggedFirstName");
+var loggedLastName = localStorage.getItem("loggedLastName");
+var loggedPhoneNumber = localStorage.getItem("loggedPhoneNumber");
+var loggedBirthDay = localStorage.getItem("loggedBirthDay");
 
 window.Login = {
     API_URL: "http://localhost:8084",
@@ -71,9 +78,7 @@ window.Login = {
     getLoggedInUser: function () {
 
         let loggedUserName = $('#username-login').val();
-        console.log(loggedUserName);
         let loggedPassword = $('#pass-login').val();
-        console.log(loggedPassword);
 
         $.ajax({
             url: Login.API_URL + "/profiles/userName&password?password=" + loggedPassword + "&userName=" + loggedUserName,
@@ -81,16 +86,23 @@ window.Login = {
         }).done(function (response) {
             console.log(response);
             loggedUserId = parseInt(response.id);
+            loggedUserIsDoctor = response.doctor;
+
             localStorage.setItem("loggedUserId", loggedUserId);
+            localStorage.setItem("loggedUserIsDoctor", loggedUserIsDoctor);
         })
     },
 
     getLoggedInProfile: function () {
         $.ajax({
-            url: Login.API_URL + "/patients/" + localStorage.getItem("loggedUserId"),
+            url: Login.API_URL + "/patients/" + loggedUserId,
             method: "GET"
         }).done(function (loggedUser) {
-            console.log(loggedUser)
+            console.log(loggedUser);
+            localStorage.setItem("loggedFirstName",loggedUser.firstName);
+            localStorage.setItem("loggedLastName",loggedUser.lastName);
+            localStorage.setItem("loggedPhoneNumber",loggedUser.phoneNumber);
+            localStorage.setItem("loggedBirthDay",loggedUser.birthDate);
         })
     }
     ,
