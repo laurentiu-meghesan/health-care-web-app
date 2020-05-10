@@ -39,35 +39,42 @@ window.Booking = {
     createAppointment: function () {
 
         let patientId = parseInt(localStorage.getItem("loggedUserId"));
+        console.log(patientId);
 
-        let dateValue = new Date($("#date").val());
-        let year = dateValue.getFullYear();
-        let month = dateValue.getMonth();
-        let day = dateValue.getDate();
+        if (patientId == null) {
+            alert("You need to update your profile first.")
+            location.reload(true);
+        } else {
 
-        let timeValue = $("#time").val();
-        let time = timeValue.split(':');
-        let hours = parseInt(time[0]);
-        let minutes = parseInt(time[1]);
+            let dateValue = new Date($("#date").val());
+            let year = dateValue.getFullYear();
+            let month = dateValue.getMonth();
+            let day = dateValue.getDate();
 
-        let timeDate = new Date(year, month, day, hours + 3, minutes);
+            let timeValue = $("#time").val();
+            let time = timeValue.split(':');
+            let hours = parseInt(time[0]);
+            let minutes = parseInt(time[1]);
 
-        let requestBody = {
-            doctorId: 7,
-            patientId: patientId,
-            appointmentDate: timeDate,
-            symptoms: "insomnia"
-        };
+            let timeDate = new Date(year, month, day, hours + 3, minutes);
 
-        $.ajax({
-            url: Booking.API_URL + "/appointments",
-            method: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(requestBody)
-        }).done(function () {
-            Booking.getAppointments();
-        })
+            let requestBody = {
+                doctorId: 7,
+                patientId: patientId,
+                appointmentDate: timeDate,
+                symptoms: "insomnia"
+            };
 
+            $.ajax({
+                url: Booking.API_URL + "/appointments",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(requestBody)
+            }).done(function () {
+                Booking.getAppointments();
+            })
+
+        }
     },
 
     bindEvents: function () {

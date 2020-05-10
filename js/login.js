@@ -76,15 +76,24 @@ window.Login = {
         console.log(loggedPassword);
 
         $.ajax({
-            url: Login.API_URL + "/profiles/userName&password?password=" + loggedPassword + "&userName=" +loggedUserName,
+            url: Login.API_URL + "/profiles/userName&password?password=" + loggedPassword + "&userName=" + loggedUserName,
             method: "GET"
         }).done(function (response) {
             console.log(response);
             loggedUserId = parseInt(response.id);
             localStorage.setItem("loggedUserId", loggedUserId);
-            console.log("Logged user id = " + loggedUserId);
         })
     },
+
+    getLoggedInProfile: function () {
+        $.ajax({
+            url: Login.API_URL + "/patients/" + localStorage.getItem("loggedUserId"),
+            method: "GET"
+        }).done(function (loggedUser) {
+            console.log(loggedUser)
+        })
+    }
+    ,
 
     bindEvents: function () {
         $('#sign-up').on('click', function (event) {
@@ -105,6 +114,8 @@ window.Login = {
 
             event.preventDefault();
             Login.getLoggedInUser();
+            // location.reload(true);
+            Login.getLoggedInProfile();
         })
     }
 };
