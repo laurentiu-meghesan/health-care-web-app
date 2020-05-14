@@ -58,16 +58,28 @@
                 <li><a href="booking.html">Booking</a></li>
                 <li><a href="messages.html">Messages</a></li>
                 <li class="menu-active"><a href="profile.html">Profile</a></li>
+                <li><a href="login.html" id="buttonAppear">Logout</a></li>
             </ul>
         </nav>
     </div>
 </header>
 <!-- Header End -->
 
-<main id="main">
+<main id="main" style="background-color: deepskyblue">
 
+    <h3 align="center" style="color: black">Welcome<p id="output"></p></h3>
+    <h5 style="padding-left: 50px; color: darkblue"><p id="output2"></p></h5>
+    <h5 style="padding-left: 50px; color: darkblue"><p id="output3"></p></h5>
+    <h5 style="padding-left: 50px; color: darkblue"><p id="output4"></p></h5>
 
+    <div style="padding-left: 50px; background-color: #0dab76">
 
+    <input type="text" id="firstName" placeholder="Enter first name">
+    <input type="text" id="lastName" placeholder="Enter last name">
+    <input type="text" id="birthday" placeholder="Enter birthday">
+    <input type="text" id="phone" placeholder="Enter phone number">
+
+    </div>
 
     <!-- Support Section Start -->
     <section id="support" class="wow fadeInUp">
@@ -100,6 +112,7 @@
 <!-- Main Javascript File -->
 <script src="js/main.js"></script>
 <script src="js/login.js"></script>
+<script src="js/profile.js"></script>
 
 </body>
 </html>

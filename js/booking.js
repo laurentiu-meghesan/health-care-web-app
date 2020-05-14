@@ -3,7 +3,7 @@ window.Booking = {
     API_URL: "http://localhost:8084",
 
     getAppointments: function () {
-        let patientId = localStorage.getItem("loggedUserId");
+        let patientId = sessionStorage.getItem("loggedUserId");
 
         $.ajax({
             url: Booking.API_URL + "/appointments/patientId=" + patientId,
@@ -38,7 +38,7 @@ window.Booking = {
 
     createAppointment: function () {
 
-        let patientId = parseInt(localStorage.getItem("loggedUserId"));
+        let patientId = parseInt(sessionStorage.getItem("loggedUserId"));
         console.log(patientId);
 
         if (patientId == null) {

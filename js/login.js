@@ -7,13 +7,16 @@ var lastNameInput = null;
 var phoneNumberInput = null;
 var birthDateInput = null;
 
-//variables for loggen in user
-var loggedUserId = localStorage.getItem("loggedUserId");
-var loggedUserIsDoctor = localStorage.getItem("loggedUserIsDoctor");
-var loggedFirstName = localStorage.getItem("loggedFirstName");
-var loggedLastName = localStorage.getItem("loggedLastName");
-var loggedPhoneNumber = localStorage.getItem("loggedPhoneNumber");
-var loggedBirthDay = localStorage.getItem("loggedBirthDay");
+//variables for logged in user
+
+var userIsLoggedIn = sessionStorage.getItem("userIsLoggedIn");
+var loggedUserId = sessionStorage.getItem("loggedUserId");
+var loggedUserIsDoctor = sessionStorage.getItem("loggedUserIsDoctor");
+var loggedFirstName = sessionStorage.getItem("loggedFirstName");
+var loggedLastName = sessionStorage.getItem("loggedLastName");
+var loggedPhoneNumber = sessionStorage.getItem("loggedPhoneNumber");
+var loggedBirthDay = sessionStorage.getItem("loggedBirthDay");
+var loggedEmail = sessionStorage.getItem("loggedEmail");
 
 window.Login = {
     API_URL: "http://localhost:8084",
@@ -85,27 +88,51 @@ window.Login = {
             method: "GET"
         }).done(function (response) {
             console.log(response);
-            loggedUserId = parseInt(response.id);
-            loggedUserIsDoctor = response.doctor;
 
-            localStorage.setItem("loggedUserId", loggedUserId);
-            localStorage.setItem("loggedUserIsDoctor", loggedUserIsDoctor);
+            sessionStorage.setItem("loggedUserId", response.id);
+            sessionStorage.setItem("loggedUserIsDoctor", response.doctor);
+            sessionStorage.setItem("loggedEmail", response.email);
+
+            Login.getLoggedInProfile();
         })
     },
 
     getLoggedInProfile: function () {
         $.ajax({
-            url: Login.API_URL + "/patients/" + loggedUserId,
+            url: Login.API_URL + "/patients/" + parseInt(sessionStorage.getItem("loggedUserId")),
             method: "GET"
         }).done(function (loggedUser) {
             console.log(loggedUser);
-            localStorage.setItem("loggedFirstName",loggedUser.firstName);
-            localStorage.setItem("loggedLastName",loggedUser.lastName);
-            localStorage.setItem("loggedPhoneNumber",loggedUser.phoneNumber);
-            localStorage.setItem("loggedBirthDay",loggedUser.birthDate);
+
+            sessionStorage.setItem("loggedFirstName", loggedUser.firstName);
+            sessionStorage.setItem("loggedLastName", loggedUser.lastName);
+            sessionStorage.setItem("loggedPhoneNumber", loggedUser.phoneNumber);
+            sessionStorage.setItem("loggedBirthDay", loggedUser.birthDate);
+
+            if (loggedUser.id != null) {
+                userIsLoggedIn = true;
+                sessionStorage.setItem("userIsLoggedIn", userIsLoggedIn);
+                document.getElementById("output5").innerHTML = "Login successfully!";
+            }
         })
-    }
-    ,
+    },
+
+    buttonFunction: function () {
+        document.getElementById("buttonAppear").innerHTML = '<button onclick="secondFunction()">Logout</button>';
+    },
+
+    secondFunction: function () {
+
+        sessionStorage.removeItem("loggedUserId");
+        sessionStorage.removeItem("loggedUserIsDoctor");
+        sessionStorage.removeItem("loggedEmail");
+        sessionStorage.removeItem("loggedFirstName");
+        sessionStorage.removeItem("loggedLastName");
+        sessionStorage.removeItem("loggedPhoneNumber");
+        sessionStorage.removeItem("loggedBirthDay");
+
+        sessionStorage.clear();
+    },
 
     bindEvents: function () {
         $('#sign-up').on('click', function (event) {
@@ -126,8 +153,26 @@ window.Login = {
 
             event.preventDefault();
             Login.getLoggedInUser();
-            // location.reload(true);
-            Login.getLoggedInProfile();
+            console.log(loggedUserId);
+            // Login.buttonFunction()
+        });
+
+        $('#buttonAppear').on('click', function (event) {
+            event.preventDefault();
+
+            sessionStorage.removeItem("loggedUserId");
+            sessionStorage.removeItem("loggedUserIsDoctor");
+            sessionStorage.removeItem("loggedEmail");
+            sessionStorage.removeItem("loggedFirstName");
+            sessionStorage.removeItem("loggedLastName");
+            sessionStorage.removeItem("loggedPhoneNumber");
+            sessionStorage.removeItem("loggedBirthDay");
+
+            Login.buttonFunction();
+
+            sessionStorage.clear();
+
+            location.reload(true)
         })
     }
 };
