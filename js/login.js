@@ -94,6 +94,12 @@ window.Login = {
             sessionStorage.setItem("loggedEmail", response.email);
 
             Login.getLoggedInProfile();
+
+            if (response.id == null) {
+                userIsLoggedIn = false;
+                sessionStorage.setItem("userIsLoggedIn", userIsLoggedIn);
+                document.getElementById("output5").innerHTML = "Login unsuccessfully! Try again."
+            }
         })
     },
 
@@ -134,6 +140,62 @@ window.Login = {
         sessionStorage.clear();
     },
 
+    editEmail: function () {
+
+
+    },
+
+    editProfile: function () {
+
+        let editedFirstName = $("#firstName-editSection").val();
+        let editedLastName = $("#lastName-editSection").val();
+        let editedBirthdayInput = $("#birthday-editSection").val();
+        let editedBirthday = new Date();
+        let editedPhone = $("#phone-editSection").val();
+        let profileId = sessionStorage.getItem("loggedUserId");
+
+        if (editedFirstName === null) {
+            editedFirstName = sessionStorage.getItem("loggedFirstName");
+        }
+
+        if (editedLastName === null) {
+            editedLastName = sessionStorage.getItem("loggedLastName");
+        }
+
+        if (editedPhone === null) {
+            editedPhone = sessionStorage.getItem("loggedPhoneNumber");
+        }
+
+        if (editedBirthdayInput === null) {
+            editedBirthdayInput = sessionStorage.getItem("loggedBirthDay");
+        } else {
+            editedBirthday = new Date(editedBirthday);
+        }
+
+        let requestBody = {
+            birthDate: editedBirthday,
+            firstName: editedFirstName,
+            lastName: editedLastName,
+            phoneNumber: editedPhone,
+            profileId: profileId
+        };
+
+        $.ajax({
+            url: Login.API_URL + "/patients/" + parseInt(sessionStorage.getItem("loggedUserId")),
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(requestBody)
+        }).done(function () {
+            console.log(editedFirstName, editedLastName, editedBirthday);
+            console.log(requestBody);
+            Login.cancelEdit();
+        })
+    },
+
+    cancelEdit: function () {
+        document.querySelector("#edit-section").reset();
+    },
+
     bindEvents: function () {
         $('#sign-up').on('click', function (event) {
 
@@ -172,6 +234,12 @@ window.Login = {
 
             sessionStorage.clear();
 
+            location.reload(true)
+        });
+
+        $('#saveButton-editSection').click(function (event) {
+            event.preventDefault();
+            Login.editProfile();
             location.reload(true)
         })
     }

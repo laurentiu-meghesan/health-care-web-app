@@ -10,6 +10,9 @@
     <!-- Favicons -->
     <link href="img/favicon.ico" rel="icon">
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Nunito:600,700,800,900" rel="stylesheet">
@@ -72,12 +75,21 @@
     <h5 style="padding-left: 50px; color: darkblue"><p id="output3"></p></h5>
     <h5 style="padding-left: 50px; color: darkblue"><p id="output4"></p></h5>
 
-    <div style="padding-left: 50px; background-color: #0dab76">
+    <div style="padding-left: 50px; background-color: #0e857b; color: black" id="edit-section">
 
-    <input type="text" id="firstName" placeholder="Enter first name">
-    <input type="text" id="lastName" placeholder="Enter last name">
-    <input type="text" id="birthday" placeholder="Enter birthday">
-    <input type="text" id="phone" placeholder="Enter phone number">
+        <p>Editing section: &nbsp;&nbsp;&nbsp;
+
+            <input type="text" id="firstName-editSection" placeholder="Enter first name">
+            <input type="text" id="lastName-editSection" placeholder="Enter last name">
+            <input type="text" id="birthday-editSection" placeholder="Enter birthday">
+            <input type="text" id="phone-editSection" placeholder="New phone number">
+            <input type="text" id="email-editSection" placeholder="New email address">
+
+            <button type="submit" id="saveButton-editSection" title="Save"><i class="fas fa-save"></i></button>
+            <button type="reset" onclick="Login.cancelEdit()" title="Cancel"><i class="fas fa-window-close"></i>
+            </button>
+
+        </p>
 
     </div>
 
