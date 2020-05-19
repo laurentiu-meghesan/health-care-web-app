@@ -75,23 +75,32 @@
     <h5 style="padding-left: 50px; color: darkblue"><p id="output3"></p></h5>
     <h5 style="padding-left: 50px; color: darkblue"><p id="output4"></p></h5>
 
-    <div style="padding-left: 50px; background-color: #0e857b; color: black" id="edit-section">
+    <form>
+        <div style="padding-left: 50px; background-color: #0e857b; color: black" id="edit-section">
 
-        <p>Editing section: &nbsp;&nbsp;&nbsp;
+            <p>Editing section: &nbsp;&nbsp;&nbsp;
+                <input type="text" id="firstName-editSection" placeholder="Edit first name">
+                <input type="text" id="lastName-editSection" placeholder="Edit last name">
+                <input type="text" id="birthday-editSection" placeholder="Edit b-day(YYYY-MM-DD)">
+                <input type="text" id="phone-editSection" placeholder="New phone number">
+                <input type="text" id="email-editSection" placeholder="New email address">
 
-            <input type="text" id="firstName-editSection" placeholder="Enter first name">
-            <input type="text" id="lastName-editSection" placeholder="Enter last name">
-            <input type="text" id="birthday-editSection" placeholder="Enter birthday">
-            <input type="text" id="phone-editSection" placeholder="New phone number">
-            <input type="text" id="email-editSection" placeholder="New email address">
+                <button type="submit" id="saveButton-editSection" title="Save"><i class="fas fa-save"></i></button>
+                <button type="reset" onclick="Login.cancelEdit()" title="Cancel"><i class="fas fa-window-close"></i>
+                </button>
+            </p>
 
-            <button type="submit" id="saveButton-editSection" title="Save"><i class="fas fa-save"></i></button>
-            <button type="reset" onclick="Login.cancelEdit()" title="Cancel"><i class="fas fa-window-close"></i>
-            </button>
+            <p>Change password: &nbsp;&nbsp;&nbsp;
+                <input type="password" id="oldPass-editSection" placeholder="Enter old password">
+                <input type="password" id="newPass-editSection" placeholder="Enter new password">
+                <input type="password" id="newPass2-editSection" placeholder="Repeat new password">
+                <button type="submit" id="savePass-editSection" title="Save"><i class="fas fa-save"></i></button>
+                <button type="reset" onclick="Login.cancelEdit()" title="Cancel"><i class="fas fa-window-close"></i>
+                </button>
+            </p>
 
-        </p>
-
-    </div>
+        </div>
+    </form>
 
     <!-- Support Section Start -->
     <section id="support" class="wow fadeInUp">

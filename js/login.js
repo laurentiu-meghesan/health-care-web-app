@@ -142,7 +142,35 @@ window.Login = {
 
     editEmail: function () {
 
+        let editedEmail = $("#email-editSection").val();
 
+        if (editedEmail.length === 0) {
+            editedEmail = sessionStorage.getItem("loggedEmail");
+        } else sessionStorage.setItem("loggedEmail", editedEmail);
+
+        $.ajax({
+            url: Login.API_URL + "/profiles/" + parseInt(sessionStorage.getItem("loggedUserId")),
+        }).done(function (profile) {
+            let username = profile.userName;
+            let password = profile.password;
+
+            let requestBody = {
+                doctor: sessionStorage.getItem("loggedUserIsDoctor"),
+                email: editedEmail,
+                password: password,
+                userName: username
+            };
+
+            $.ajax({
+                url: Login.API_URL + "/profiles/" + parseInt(sessionStorage.getItem("loggedUserId")),
+                method: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify(requestBody)
+            }).done(function () {
+                console.log(editedEmail);
+                console.log(requestBody);
+            })
+        });
     },
 
     editProfile: function () {
@@ -154,22 +182,23 @@ window.Login = {
         let editedPhone = $("#phone-editSection").val();
         let profileId = sessionStorage.getItem("loggedUserId");
 
-        if (editedFirstName === null) {
+        if (editedFirstName.length === 0) {
             editedFirstName = sessionStorage.getItem("loggedFirstName");
-        }
+        } else sessionStorage.setItem("loggedFirstName", editedFirstName);
 
-        if (editedLastName === null) {
+        if (editedLastName.length === 0) {
             editedLastName = sessionStorage.getItem("loggedLastName");
-        }
+        } else sessionStorage.setItem("loggedLastName", editedLastName);
 
-        if (editedPhone === null) {
+        if (editedPhone.length === 0) {
             editedPhone = sessionStorage.getItem("loggedPhoneNumber");
-        }
+        } else sessionStorage.setItem("loggedPhoneNumber", editedPhone);
 
-        if (editedBirthdayInput === null) {
-            editedBirthdayInput = sessionStorage.getItem("loggedBirthDay");
+        if (editedBirthdayInput.length === 0) {
+            editedBirthday = sessionStorage.getItem("loggedBirthDay");
         } else {
-            editedBirthday = new Date(editedBirthday);
+            editedBirthday = editedBirthdayInput;
+            sessionStorage.setItem("loggedBirthDay", editedBirthdayInput)
         }
 
         let requestBody = {
@@ -188,17 +217,58 @@ window.Login = {
         }).done(function () {
             console.log(editedFirstName, editedLastName, editedBirthday);
             console.log(requestBody);
-            Login.cancelEdit();
         })
     },
 
+    changePass: function () {
+
+        let oldPassword = $('#oldPass-editSection').val();
+        let newPassword = $('#newPass-editSection').val();
+        let newPassword2 = $('#newPass2-editSection').val();
+
+        if (newPassword !== newPassword2) {
+            alert("The new entered passwords are not identical! Try again.");
+            location.reload(true);
+        } else {
+
+            $.ajax({
+                url: Login.API_URL + "/profiles/" + parseInt(sessionStorage.getItem("loggedUserId")),
+            }).done(function (profile) {
+                let username = profile.userName;
+                let email = profile.email;
+
+                if (oldPassword !== profile.password) {
+                    alert("Old password is wrong! Try again.");
+                    location.reload(true);
+                } else {
+
+                    let requestBody = {
+                        doctor: sessionStorage.getItem("loggedUserIsDoctor"),
+                        email: email,
+                        password: newPassword,
+                        userName: username
+                    };
+
+                    $.ajax({
+                        url: Login.API_URL + "/profiles/" + parseInt(sessionStorage.getItem("loggedUserId")),
+                        method: "PUT",
+                        contentType: "application/json",
+                        data: JSON.stringify(requestBody)
+                    }).done(function () {
+                        console.log(requestBody);
+                    })
+                }
+            });
+        }
+    },
+
     cancelEdit: function () {
-        document.querySelector("#edit-section").reset();
+        document.forms["firstName-editSection", "lastName-editSection", "birthday-editSection",
+            "phone-editSection", "email-editSection"].reset();
     },
 
     bindEvents: function () {
         $('#sign-up').on('click', function (event) {
-
             event.preventDefault();
             let password = $('#pass-signup').val();
             let password2 = $('#pass2-signup').val();
@@ -212,11 +282,9 @@ window.Login = {
         });
 
         $('#log-in').on('click', function (event) {
-
             event.preventDefault();
             Login.getLoggedInUser();
             console.log(loggedUserId);
-            // Login.buttonFunction()
         });
 
         $('#buttonAppear').on('click', function (event) {
@@ -237,10 +305,13 @@ window.Login = {
             location.reload(true)
         });
 
-        $('#saveButton-editSection').click(function (event) {
-            event.preventDefault();
+        $('#saveButton-editSection').click(function () {
             Login.editProfile();
-            location.reload(true)
+            Login.editEmail();
+        });
+
+        $('#savePass-editSection').click(function () {
+            Login.changePass();
         })
     }
 };
