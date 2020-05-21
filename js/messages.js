@@ -1,6 +1,15 @@
+function openForm() {
+    document.getElementById("myChatForm").style.display = "block";
+}
+
+function closeForm() {
+    document.getElementById("myChatForm").style.display = "none";
+}
+
 window.Messages = {
 
     API_BASE_URL: "http://localhost:8084",
+
 
     getMessages: function () {
         $.ajax({
