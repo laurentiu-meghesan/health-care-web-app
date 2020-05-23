@@ -68,31 +68,33 @@
 
 <main id="main">
 
-    <button class="open-button" onclick="openForm()">Chat</button>
-    <div class="chat-popup" id="myChatForm">
-        <form action="/action_page.php" class="form-chat-container">
-            <h2>Chat</h2>
+    <div class="messages-class">
 
-            <label for="msg"><b>Message</b></label>
-            <textarea placeholder="Type message.." name="msg" required></textarea>
+        <button class="open-button" onclick="openForm()">Chat</button>
+        <div class="chat-popup" id="myChatForm">
+            <form class="form-chat-container">
+                <h2>Chat</h2>
 
-            <button type="submit" class="btn">Send</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
+                <label for="msg"><b>Message</b></label>
+                <textarea id="textarea-message" placeholder="Type message.." name="msg" required></textarea>
+
+                <button type="submit" id="message-submit" class="btn">Send</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
+        </div>
+
+        <div class="container-chat">
+            <img src="img/icon/icon-1.png" alt="Avatar">
+            <p>Hello. How are you today?</p>
+            <span class="time-right">11:00</span>
+        </div>
+
+        <div class="container-chat darker-chat">
+            <img src="img/icon/icon-6.png" alt="Avatar" class="right">
+            <p>Hey! I'm fine. Thanks for asking!</p>
+            <span class="time-left">11:01</span>
+        </div>
     </div>
-
-    <div class="container-chat">
-        <img src="/w3images/bandmember.jpg" alt="Avatar">
-        <p>Hello. How are you today?</p>
-        <span class="time-right">11:00</span>
-    </div>
-
-    <div class="container-chat darker-chat">
-        <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="right">
-        <p>Hey! I'm fine. Thanks for asking!</p>
-        <span class="time-left">11:01</span>
-    </div>
-
 
     <!-- Support Section Start -->
     <section id="support" class="wow fadeInUp">
