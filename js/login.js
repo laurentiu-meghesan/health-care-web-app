@@ -87,7 +87,6 @@ window.Login = {
             url: Login.API_URL + "/profiles/userName&password?password=" + loggedPassword + "&userName=" + loggedUserName,
             method: "GET"
         }).done(function (response) {
-            console.log(response);
 
             sessionStorage.setItem("loggedUserId", response.id);
             sessionStorage.setItem("loggedUserIsDoctor", response.doctor);
@@ -167,7 +166,6 @@ window.Login = {
                 contentType: "application/json",
                 data: JSON.stringify(requestBody)
             }).done(function () {
-                console.log(editedEmail);
                 console.log(requestBody);
             })
         });
@@ -215,7 +213,6 @@ window.Login = {
             contentType: "application/json",
             data: JSON.stringify(requestBody)
         }).done(function () {
-            console.log(editedFirstName, editedLastName, editedBirthday);
             console.log(requestBody);
         })
     },
@@ -284,7 +281,6 @@ window.Login = {
         $('#log-in').on('click', function (event) {
             event.preventDefault();
             Login.getLoggedInUser();
-            console.log(loggedUserId);
         });
 
         $('#buttonAppear').on('click', function (event) {

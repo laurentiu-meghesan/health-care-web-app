@@ -35,11 +35,13 @@ window.Booking = {
         return `<tr>
             <td>${formattedDate}</td>
             <td>${appointment.doctorId}</td>
-            <td>${appointment.patientId}</td>
             <td>${appointment.symptoms}</td>
             <td>${appointment.diagnostic}</td>
             <td>${appointment.treatment}</td>
             <td>${appointment.recommendations}</td>
+            <td><a href="#" data-id=${appointment.id} class="delete-appointment">
+                <i class="fas fa-trash-alt" style="display: flex; align-items: center;justify-content: center; size: 180px"></i>
+            </a></td>
         </tr>`;
     },
 
@@ -69,7 +71,10 @@ window.Booking = {
                 doctorId: 7,
                 patientId: patientId,
                 appointmentDate: timeDate,
-                symptoms: "insomnia"
+                symptoms: "Available after consultation.",
+                diagnostic: "Available after consultation.",
+                treatment: "Available after consultation.",
+                recommendations: "Available after consultation."
             };
 
             $.ajax({
@@ -82,6 +87,15 @@ window.Booking = {
             })
 
         }
+    },
+
+    deleteAppointment: function (id) {
+        $.ajax({
+            url: Booking.API_URL + "/appointments/" + id,
+            method: "DELETE"
+        }).done(function () {
+            Booking.getAppointments();
+        })
     },
 
     bindEvents: function () {
@@ -101,6 +115,13 @@ window.Booking = {
             //
             // }
         });
+
+        $("#appointments-table").delegate(".delete-appointment", "click", function (event) {
+            event.preventDefault();
+            let appointmentId = $(this).data("id");
+
+            Booking.deleteAppointment(appointmentId);
+        })
     }
 };
 

@@ -53,12 +53,24 @@ window.Messages = {
     ,
 
     displayMessages: function (messages) {
-        let messagesHtml = '';
+        let messageSentHtml = '';
+        let messageReceivedHtml = '';
 
-        messages.forEach(messageSent => messagesHtml += Messages.getHtmlForMessageSent(messageSent));
-        messages.forEach(messageReceived => messagesHtml += Messages.getHtmlForMessageReceived(messageReceived));
+        messages.forEach(messageSent => {messageSentHtml += Messages.getHtmlForMessageSent(messageSent)});
 
-        $('.messages-class .container-chat').html(messagesHtml);
+        if (messages.messageReceived =! null) {
+            messages.forEach(messageReceived => messageReceivedHtml += Messages.getHtmlForMessageReceived(messageReceived));
+        }
+
+        // messages.forEach(myFunction(messages.messageSent, messages.messageReceived));
+        //
+        // function myFunction(messageSent, messageReceived){
+        //     messagesHtml += Messages.getHtmlForMessageSent(messageSent);
+        //     messagesHtml += Messages.getHtmlForMessageReceived(messageReceived);
+        // }
+
+        $('.container-chat').html(messageSentHtml);
+        $('.darker-chat').html(messageReceivedHtml);
     }
     ,
 
@@ -66,7 +78,7 @@ window.Messages = {
         return `<div class="container-chat">
         <img src="img/icon/icon-1.png" alt="Avatar">
         <p>${message.messageSent}</p>
-        <span class="time-right">${message.messageDate}</span>
+        <span class="time-right">${new Date(message.messageDate).toLocaleString()}</span>
     </div>`;
 
     },
@@ -75,7 +87,7 @@ window.Messages = {
         return `<div class="container-chat darker-chat">
         <img src="img/icon/icon-6.png" alt="Avatar" class="right">
         <p>${message.messageReceived}</p>
-        <span class="time-left">${message.messageDate}</span>
+        <span class="time-left">${new Date(message.messageDate).toLocaleString()}</span>
     </div>`;
     },
 
