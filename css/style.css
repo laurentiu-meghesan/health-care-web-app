@@ -1243,37 +1243,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 /* ================================================= */
-/* ------------------- Footer CSS ------------------ */
-/* ================================================= */
-
-#footer {
-    position: relative;
-    background: #222222;
-    padding: 0 0 30px 0;
-}
-
-#footer .copyright {
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 300;
-    text-align: center;
-    padding-top: 30px;
-}
-
-#footer .copyright p {
-    margin: 0;
-}
-
-#footer .copyright a {
-    color: #ffffff;
-    font-weight: 600;
-}
-
-#footer .copyright a:hover {
-    color: #0e857b;
-}
-
-/* ================================================= */
 /* ------------------ Messages CSS ----------------- */
 /* ================================================= */
 
@@ -1300,8 +1269,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 /* The popup chat - hidden by default */
 .form-popup-chat {
     box-sizing: border-box;
-
-    /*display: none;*/
+    display: none;
     position: fixed;
     bottom: 0;
     right: 15px;
@@ -1356,8 +1324,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 
-
-
 /* Chat containers */
 .container-chat {
     margin-left: 330px;
@@ -1373,7 +1339,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 /* Darker chat container */
 .darker-chat {
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
     color: white;
     border-color: #404040;
     background-color: #545454;
@@ -1412,4 +1378,48 @@ body.mobile-nav-active #mobile-nav-toggle {
 .time-left {
     float: left;
     color: #ffffff;
+}
+
+
+.messages-class {
+    background-color: #d1d1d1;
+
+}
+.chat-popup{
+    display: none;
+}
+.container-chat {
+    margin-left: 400px;
+    margin-bottom: 30px;
+}
+
+/* ================================================= */
+/* ------------------- Footer CSS ------------------ */
+/* ================================================= */
+
+#footer {
+    position: relative;
+    background: #222222;
+    padding: 0 0 30px 0;
+}
+
+#footer .copyright {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 300;
+    text-align: center;
+    padding-top: 30px;
+}
+
+#footer .copyright p {
+    margin: 0;
+}
+
+#footer .copyright a {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+#footer .copyright a:hover {
+    color: #0e857b;
 }

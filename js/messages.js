@@ -46,37 +46,37 @@ window.Messages = {
             url: Messages.API_BASE_URL + "/patientId=" + patientId
         }).done(function (response) {
             console.log(response);
+            let displayContent = response.content;
+            displayContent = displayContent.sort(postMessage);
 
-            Messages.displayMessages(response.content);
+            Messages.displayMessages(displayContent.reverse());
         })
     }
     ,
 
     displayMessages: function (messages) {
-        let messageSentHtml = '';
-        let messageReceivedHtml = '';
+        let messagesHtml = '';
 
-        messages.forEach(messageSent => {messageSentHtml += Messages.getHtmlForMessageSent(messageSent)});
+        function messageContent(message) {
+            let messageSent = Messages.getHtmlForMessageSent(message);
+            let messageReceived = '';
+            if (message.messageReceived.length > 0) {
+                messageReceived = Messages.getHtmlForMessageReceived(message);
+            }
 
-        if (messages.messageReceived =! null) {
-            messages.forEach(messageReceived => messageReceivedHtml += Messages.getHtmlForMessageReceived(messageReceived));
+            if (messageReceived.length === 0) {
+                messagesHtml += messageSent;
+            } else messagesHtml += messageReceived + messageSent;
         }
 
-        // messages.forEach(myFunction(messages.messageSent, messages.messageReceived));
-        //
-        // function myFunction(messageSent, messageReceived){
-        //     messagesHtml += Messages.getHtmlForMessageSent(messageSent);
-        //     messagesHtml += Messages.getHtmlForMessageReceived(messageReceived);
-        // }
+        messages.forEach(message => messageContent(message));
 
-        $('.container-chat').html(messageSentHtml);
-        $('.darker-chat').html(messageReceivedHtml);
-    }
-    ,
+        $('.messages-new-class').html(messagesHtml);
+    },
 
     getHtmlForMessageSent: function (message) {
         return `<div class="container-chat">
-        <img src="img/icon/icon-1.png" alt="Avatar">
+        <img src="img/icon/icon-6.png" alt="Avatar">
         <p>${message.messageSent}</p>
         <span class="time-right">${new Date(message.messageDate).toLocaleString()}</span>
     </div>`;
@@ -85,14 +85,15 @@ window.Messages = {
 
     getHtmlForMessageReceived: function (message) {
         return `<div class="container-chat darker-chat">
-        <img src="img/icon/icon-6.png" alt="Avatar" class="right">
+        <img src="img/icon/icon-1.png" alt="Avatar" class="right">
         <p>${message.messageReceived}</p>
-        <span class="time-left">${new Date(message.messageDate).toLocaleString()}</span>
+        <span class="time-left">${new Date(message.messageReceivedDate).toLocaleString()}</span>
     </div>`;
     },
 
     bindEvents: function () {
-        $('#message-submit').click(function () {
+        $('#message-submit').click(function (event) {
+            event.preventDefault();
             Messages.createMessage();
         })
     }

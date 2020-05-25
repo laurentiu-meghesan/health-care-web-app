@@ -72,28 +72,32 @@
 
         <button class="open-button" onclick="openForm()">Chat</button>
         <div class="chat-popup" id="myChatForm">
-            <form class="form-chat-container">
+            <form action="/action_page.php" class="form-chat-container">
                 <h2>Chat</h2>
 
                 <label for="msg"><b>Message</b></label>
-                <textarea id="textarea-message" placeholder="Type message.." name="msg" required></textarea>
+                <textarea id="textarea-message" placeholder="Type message.." id="msg" required></textarea>
 
                 <button type="submit" id="message-submit" class="btn">Send</button>
                 <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
             </form>
         </div>
 
-        <div class="container-chat">
-            <img src="img/icon/icon-1.png" alt="Avatar">
-            <p>Hello. How are you today?</p>
-            <span class="time-right">11:00</span>
+        <div class="messages-new-class">
+            <div class="container-chat">
+                <img src="img/icon/icon-6.png" alt="Avatar">
+                <p>Hello. How are you today?</p>
+                <span class="time-right">11:00</span>
+            </div>
+
+            <div class="container-chat darker-chat">
+                <img src="img/icon/icon-1.png" alt="Avatar" class="right">
+                <p>Hey! I'm fine. Thanks for asking!</p>
+                <span class="time-left">11:01</span>
+            </div>
         </div>
 
-        <div class="container-chat darker-chat">
-            <img src="img/icon/icon-6.png" alt="Avatar" class="right">
-            <p>Hey! I'm fine. Thanks for asking!</p>
-            <span class="time-left">11:01</span>
-        </div>
+        <div style="clear: both;" > </div>
     </div>
 
     <!-- Support Section Start -->
