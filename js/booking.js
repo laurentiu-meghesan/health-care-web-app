@@ -51,7 +51,7 @@ window.Booking = {
         console.log(patientId);
 
         if (patientId == null) {
-            alert("You need to update your profile first.")
+            alert("You need to update your profile first.");
             location.reload(true);
         } else {
 
@@ -118,9 +118,12 @@ window.Booking = {
 
         $("#appointments-table").delegate(".delete-appointment", "click", function (event) {
             event.preventDefault();
-            let appointmentId = $(this).data("id");
 
-            Booking.deleteAppointment(appointmentId);
+            let answer = confirm("Are you sure you want to delete this appointment?");
+            if (answer == true) {
+                let appointmentId = $(this).data("id");
+                Booking.deleteAppointment(appointmentId);
+            }
         })
     }
 };
