@@ -40,7 +40,7 @@ window.Booking = {
             <td>${appointment.treatment}</td>
             <td>${appointment.recommendations}</td>
             <td><a href="#" data-id=${appointment.id} class="delete-appointment">
-                <i class="fas fa-trash-alt" style="display: flex; align-items: center;justify-content: center; size: 180px"></i>
+                <i class="fas fa-trash-alt" style="display: flex; align-items: center;justify-content: center; size: 180px" title="Delete appointment"></i>
             </a></td>
         </tr>`;
     },

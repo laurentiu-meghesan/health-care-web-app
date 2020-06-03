@@ -1383,15 +1383,21 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .messages-class {
     background-color: #d1d1d1;
+    display: flex;
+}
+
+.chat-popup{
+    margin-left: 10px;
+    margin-top: 10px;
 
 }
-.chat-popup{
-    display: none;
-}
+
 .container-chat {
-    margin-left: 400px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    width: 690px;
     resize: both;
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 /* ================================================= */

@@ -77,6 +77,9 @@ window.Messages = {
     getHtmlForMessageSent: function (message) {
         return `<div class="container-chat">
         <img src="img/icon/icon-6.png" alt="Avatar">
+        <a href="#" data-id=${message.id} class="delete-message">
+                <i class="fas fa-trash-alt" style="float: right; size: 180px" title="Delete message"></i>
+            </a>
         <p>${message.messageSent}</p>
         <span class="time-right">${new Date(message.messageDate).toLocaleString()}</span>
     </div>`;
@@ -91,10 +94,29 @@ window.Messages = {
     </div>`;
     },
 
+    deleteMessage: function (id) {
+        $.ajax({
+            url: Messages.API_BASE_URL + id,
+            method: "DELETE"
+        }).done(function () {
+            Messages.getMessages();
+        })
+    },
+
     bindEvents: function () {
         $('#message-submit').click(function (event) {
             event.preventDefault();
             Messages.createMessage();
+        });
+
+        $(".messages-class").delegate(".delete-message", "click", function (event) {
+            event.preventDefault();
+
+            let answer = confirm("Are you sure you want to delete this message?");
+            if (answer == true) {
+                let messageId = $(this).data("id");
+                Messages.deleteMessage(messageId);
+            }
         })
     }
 };
