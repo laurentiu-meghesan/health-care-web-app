@@ -5,19 +5,32 @@ window.Booking = {
     getAppointments: function () {
         let patientId = sessionStorage.getItem("loggedUserId");
         userIsLoggedIn = sessionStorage.getItem("userIsLoggedIn");
+        loggedUserIsDoctor = sessionStorage.getItem("loggedUserIsDoctor");
 
         if (userIsLoggedIn) {
 
-            $.ajax({
-                url: Booking.API_URL + "/appointments/patientId=" + patientId,
-                method: "GET"
-            }).done(function (response) {
-                console.log(response);
+            if (!loggedUserIsDoctor) {
+                $.ajax({
+                    url: Booking.API_URL + "/appointments/patientId=" + patientId,
+                    method: "GET"
+                }).done(function (response) {
+                    console.log(response);
 
-                if (response.content != 0) {
-                    Booking.displayAppointments((response).content);
-                } else document.getElementById('output-booking').innerHTML = "You don't have any appointments yet.";
-            })
+                    if (response.content != 0) {
+                        Booking.displayAppointments((response).content);
+                    } else document.getElementById('output-booking').innerHTML = "You don't have any appointments yet.";
+                })
+            } else {
+                $.ajax({
+                    url: Booking.API_URL + "/appointments"
+                }).done(function (response) {
+                    console.log(response);
+
+                    if (response.content != 0) {
+                        Booking.displayAppointments(response.content);
+                    } else document.getElementById('output-booking').innerHTML = "You don't have any appointments yet.";
+                })
+            }
         } else document.getElementById('output-booking').innerHTML = "You must log in first!";
     },
 
@@ -35,6 +48,7 @@ window.Booking = {
         return `<tr>
             <td>${formattedDate}</td>
             <td>${appointment.doctorId}</td>
+            <td>${appointment.patientId}</td>
             <td>${appointment.symptoms}</td>
             <td>${appointment.diagnostic}</td>
             <td>${appointment.treatment}</td>
@@ -68,7 +82,7 @@ window.Booking = {
             let timeDate = new Date(year, month, day, hours + 3, minutes);
 
             let requestBody = {
-                doctorId: 7,
+                doctorId: 1,
                 patientId: patientId,
                 appointmentDate: timeDate,
                 symptoms: "Available after consultation.",

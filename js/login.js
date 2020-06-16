@@ -92,13 +92,16 @@ window.Login = {
             sessionStorage.setItem("loggedUserIsDoctor", response.doctor);
             sessionStorage.setItem("loggedEmail", response.email);
 
-            Login.getLoggedInProfile();
+            // Login.getLoggedInProfile();
 
             if (response.id == null) {
                 userIsLoggedIn = false;
                 sessionStorage.setItem("userIsLoggedIn", userIsLoggedIn);
                 document.getElementById("output5").innerHTML = "Login unsuccessfully! Try again."
-            }
+            } else if (response.doctor) {
+                Login.getLoggedInDoctor();
+            } else Login.getLoggedInProfile()
+
         })
     },
 
@@ -115,6 +118,25 @@ window.Login = {
             sessionStorage.setItem("loggedBirthDay", loggedUser.birthDate);
 
             if (loggedUser.id != null) {
+                userIsLoggedIn = true;
+                sessionStorage.setItem("userIsLoggedIn", userIsLoggedIn);
+                document.getElementById("output5").innerHTML = "Login successfully!";
+            }
+        })
+    },
+
+    getLoggedInDoctor: function () {
+        $.ajax({
+            url: Login.API_URL + "/doctors/" + parseInt(sessionStorage.getItem("loggedUserId")),
+            method: "GET"
+        }).done(function (loggedDoctor) {
+            console.log(loggedDoctor);
+
+            sessionStorage.setItem("loggedFirstName", loggedDoctor.firstName);
+            sessionStorage.setItem("loggedLastName", loggedDoctor.lastName);
+            sessionStorage.setItem("loggedPhoneNumber", loggedDoctor.phoneNumber);
+
+            if (loggedDoctor.id != null) {
                 userIsLoggedIn = true;
                 sessionStorage.setItem("userIsLoggedIn", userIsLoggedIn);
                 document.getElementById("output5").innerHTML = "Login successfully!";

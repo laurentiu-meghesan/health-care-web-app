@@ -19,7 +19,7 @@ window.Messages = {
 
         let requestBody = {
 
-            doctorId: 7,
+            doctorId: 1,
             messageDate: new Date(currentDate),
             messageReceived: "",
             messageSent: messageSent,
