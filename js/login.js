@@ -44,7 +44,7 @@ window.Login = {
 
             firstNameInput = prompt("Please enter your First Name:");
             lastNameInput = prompt("Please enter your Last Name:");
-            phoneNumberInput = prompt("Now enter your Phone Number:", "Ex: 074xxxxxxx");
+            phoneNumberInput = prompt("Now enter your Phone Number:", "Ex: 07xxxxxxxx");
             birthDateInput = prompt("Enter your birthday:", "Ex: MM.DD.YYYY");
 
             Login.createProfile();
@@ -91,8 +91,6 @@ window.Login = {
             sessionStorage.setItem("loggedUserId", response.id);
             sessionStorage.setItem("loggedUserIsDoctor", response.doctor);
             sessionStorage.setItem("loggedEmail", response.email);
-
-            // Login.getLoggedInProfile();
 
             if (response.id == null) {
                 userIsLoggedIn = false;

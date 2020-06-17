@@ -12,7 +12,7 @@ window.onload = function () {
 
     if (userIsLoggedIn) {
         document.getElementById('output').innerHTML = loggedFirstName + " " + loggedLastName;
-        if (!loggedUserIsDoctor) {
+        if (loggedUserIsDoctor == 'false') {
             document.getElementById('output2').innerHTML = "Your Birthday: " + loggedBirthDay;
         }
         document.getElementById('output3').innerHTML = "Phone number: " + loggedPhoneNumber;

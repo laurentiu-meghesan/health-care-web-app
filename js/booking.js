@@ -6,28 +6,29 @@ window.Booking = {
         let patientId = sessionStorage.getItem("loggedUserId");
         userIsLoggedIn = sessionStorage.getItem("userIsLoggedIn");
         loggedUserIsDoctor = sessionStorage.getItem("loggedUserIsDoctor");
+        console.log(patientId, userIsLoggedIn, loggedUserIsDoctor);
 
         if (userIsLoggedIn) {
 
-            if (!loggedUserIsDoctor) {
+            if (loggedUserIsDoctor == 'false') {
                 $.ajax({
                     url: Booking.API_URL + "/appointments/patientId=" + patientId,
                     method: "GET"
-                }).done(function (response) {
-                    console.log(response);
+                }).done(function (patientAppointments) {
+                    console.log(patientAppointments);
 
-                    if (response.content != 0) {
-                        Booking.displayAppointments((response).content);
+                    if (patientAppointments.content != 0) {
+                        Booking.displayAppointments(patientAppointments.content);
                     } else document.getElementById('output-booking').innerHTML = "You don't have any appointments yet.";
                 })
             } else {
                 $.ajax({
                     url: Booking.API_URL + "/appointments"
-                }).done(function (response) {
-                    console.log(response);
+                }).done(function (allAppointments) {
+                    console.log(allAppointments);
 
-                    if (response.content != 0) {
-                        Booking.displayAppointments(response.content);
+                    if (allAppointments.content != 0) {
+                        Booking.displayAppointments(allAppointments.content);
                     } else document.getElementById('output-booking').innerHTML = "You don't have any appointments yet.";
                 })
             }
