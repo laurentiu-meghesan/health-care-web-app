@@ -17,6 +17,7 @@ var loggedLastName = sessionStorage.getItem("loggedLastName");
 var loggedPhoneNumber = sessionStorage.getItem("loggedPhoneNumber");
 var loggedBirthDay = sessionStorage.getItem("loggedBirthDay");
 var loggedEmail = sessionStorage.getItem("loggedEmail");
+var officeAddress = sessionStorage.getItem("officeAddress");
 
 window.Login = {
     API_URL: "http://localhost:8084",
@@ -133,6 +134,7 @@ window.Login = {
             sessionStorage.setItem("loggedFirstName", loggedDoctor.firstName);
             sessionStorage.setItem("loggedLastName", loggedDoctor.lastName);
             sessionStorage.setItem("loggedPhoneNumber", loggedDoctor.phoneNumber);
+            sessionStorage.setItem("officeAddress", loggedDoctor.officeAddress);
 
             if (loggedDoctor.id != null) {
                 userIsLoggedIn = true;
