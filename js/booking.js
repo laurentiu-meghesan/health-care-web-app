@@ -15,8 +15,6 @@ window.Booking = {
                     url: Booking.API_URL + "/appointments/patientId=" + patientId,
                     method: "GET"
                 }).done(function (patientAppointments) {
-                    console.log(patientAppointments);
-
                     if (patientAppointments.content != 0) {
                         Booking.displayAppointments(patientAppointments.content);
                     } else document.getElementById('output-booking').innerHTML = "You don't have any appointments yet.";
@@ -25,8 +23,6 @@ window.Booking = {
                 $.ajax({
                     url: Booking.API_URL + "/appointments"
                 }).done(function (allAppointments) {
-                    console.log(allAppointments);
-
                     if (allAppointments.content != 0) {
                         Booking.displayAppointments(allAppointments.content);
                     } else document.getElementById('output-booking').innerHTML = "You don't have any appointments yet.";
