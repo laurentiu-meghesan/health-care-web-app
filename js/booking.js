@@ -38,7 +38,9 @@ window.Booking = {
     displayAppointments: function (appointments) {
         let appointmentsHtml = '';
 
-        appointments.forEach(appointment => appointmentsHtml += Booking.getHtmlForOneAppointment(appointment));
+        if (loggedUserIsDoctor == 'false') {
+            appointments.forEach(appointment => appointmentsHtml += Booking.getHtmlForOneAppointment(appointment));
+        } else appointments.forEach(appointment => appointmentsHtml += Booking.getHtmlForOneAppointmentWithEdit(appointment));
 
         $("#appointments-table tbody").html(appointmentsHtml);
     },
@@ -56,6 +58,28 @@ window.Booking = {
             <td>${appointment.recommendations}</td>
             <td><a href="#" data-id=${appointment.id} class="delete-appointment">
                 <i class="fas fa-trash-alt" style="display: flex; align-items: center;justify-content: center; size: 180px" title="Delete appointment"></i>
+            </a></td>
+        </tr>`;
+    },
+
+    getHtmlForOneAppointmentWithEdit: function (appointment) {
+        let formattedDate = new Date(appointment.appointmentDate).toLocaleString();
+
+        return `<tr>
+            <td>${formattedDate}</td>
+            <td>${appointment.doctorId}</td>
+            <td>${appointment.patientId}</td>
+            <td>${appointment.symptoms}</td>
+            <td>${appointment.diagnostic}</td>
+            <td>${appointment.treatment}</td>
+            <td>${appointment.recommendations}</td>
+            <td style="text-align: center">
+            <a href="#" data-id=${appointment.id} class="update-appointment">
+                <i class="fas fa-edit" title="Update appointment"></i>
+            </a>
+            
+            <a href="#" data-id=${appointment.id} class="delete-appointment">
+                <i class="fas fa-trash-alt"  title="Delete appointment"></i>
             </a></td>
         </tr>`;
     },
@@ -102,6 +126,48 @@ window.Booking = {
             })
 
         }
+    },
+
+    updateAppointment: function (id) {
+
+        let editedSymptoms;
+        let editedDiagnostic;
+        let editedTreatment;
+        let editedRecommendations;
+        //may be initialized as Date e.g let appointmentDate = new Date();
+        let appointmentDate;
+        let doctorId;
+        let patientId;
+
+        $.ajax({
+            url: Booking.API_URL + "/appointments/" + id,
+        }).done(function (currentAppointment) {
+            console.log(currentAppointment);
+            appointmentDate = currentAppointment.appointmentDate;
+            doctorId = currentAppointment.doctorId;
+            patientId = currentAppointment.patientId;
+        });
+
+        let requestBody = {
+            doctorId: doctorId,
+            patientId: patientId,
+            appointmentDate: appointmentDate,
+            symptoms: editedSymptoms,
+            diagnostic: editedDiagnostic,
+            treatment: editedTreatment,
+            recommendations: editedRecommendations
+        };
+
+        console.log(requestBody);
+
+        $.ajax({
+            url: Booking.API_URL + "/appointments/" + id,
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(requestBody)
+        }).done(function () {
+            Booking.getAppointments();
+        })
     },
 
     deleteAppointment: function (id) {
