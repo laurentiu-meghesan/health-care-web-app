@@ -6,7 +6,6 @@ window.Booking = {
         let patientId = sessionStorage.getItem("loggedUserId");
         userIsLoggedIn = sessionStorage.getItem("userIsLoggedIn");
         loggedUserIsDoctor = sessionStorage.getItem("loggedUserIsDoctor");
-        console.log(patientId, userIsLoggedIn, loggedUserIsDoctor);
 
         if (userIsLoggedIn) {
 
@@ -120,17 +119,15 @@ window.Booking = {
             }).done(function () {
                 Booking.getAppointments();
             })
-
         }
     },
 
     updateAppointment: function (id) {
 
-        let editedSymptoms;
-        let editedDiagnostic;
-        let editedTreatment;
-        let editedRecommendations;
-        //may be initialized as Date e.g let appointmentDate = new Date();
+        let editedSymptoms = $('#symptoms-editSection').val();
+        let editedDiagnostic = $('#diagnostic-editSection').val();
+        let editedTreatment = $('#treatment-editSection').val();
+        let editedRecommendations = $('#recommendations-editSection').val();
         let appointmentDate;
         let doctorId;
         let patientId;
@@ -142,28 +139,27 @@ window.Booking = {
             appointmentDate = currentAppointment.appointmentDate;
             doctorId = currentAppointment.doctorId;
             patientId = currentAppointment.patientId;
+
+            let requestBody = {
+                doctorId: doctorId,
+                patientId: patientId,
+                appointmentDate: appointmentDate,
+                symptoms: editedSymptoms,
+                diagnostic: editedDiagnostic,
+                treatment: editedTreatment,
+                recommendations: editedRecommendations
+            };
+            console.log(requestBody);
+
+            $.ajax({
+                url: Booking.API_URL + "/appointments/" + id,
+                method: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify(requestBody)
+            }).done(function () {
+                Booking.getAppointments();
+            })
         });
-
-        let requestBody = {
-            doctorId: doctorId,
-            patientId: patientId,
-            appointmentDate: appointmentDate,
-            symptoms: editedSymptoms,
-            diagnostic: editedDiagnostic,
-            treatment: editedTreatment,
-            recommendations: editedRecommendations
-        };
-
-        console.log(requestBody);
-
-        $.ajax({
-            url: Booking.API_URL + "/appointments/" + id,
-            method: "PUT",
-            contentType: "application/json",
-            data: JSON.stringify(requestBody)
-        }).done(function () {
-            Booking.getAppointments();
-        })
     },
 
     deleteAppointment: function (id) {
@@ -201,8 +197,46 @@ window.Booking = {
                 let appointmentId = $(this).data("id");
                 Booking.deleteAppointment(appointmentId);
             }
+        });
+
+        $("#appointments-table").delegate(".update-appointment", "click", function (event) {
+            event.preventDefault();
+            let appointmentId = $(this).data("id");
+
+            document.getElementById('update-appointment-details').insertAdjacentHTML("afterend",
+
+                "<p style='text-align: center'>Editing section: &nbsp;&nbsp;&nbsp;\n" +
+                "      <input type=\"text\" size=\'70\' id=\"symptoms-editSection\" placeholder=\"Update symptoms\">\n </p>" +
+                "      <p style='text-align: center'> <input type=\"text\" size=\'87\' id=\"diagnostic-editSection\"" +
+                " placeholder=\"Update diagnostic\">\n </p>" +
+                "      <p style='text-align: center'> <input type=\"text\" size=\'87\' id=\"treatment-editSection\" " +
+                "placeholder=\"Update treatment\">\n </p>" +
+                "      <p style='text-align: center'> <input type=\"text\" size=\'87\' id=\"recommendations-editSection\" " +
+                "placeholder=\"Update recommendations\">\n </p>" +
+                "      <p style='text-align: center'> " +
+                "<i class=\"fas fa-save\" id=\"saveButton-editAppointment\" role=\'button\' title=\'Save\' " +
+                "style=\'width: 40px; height: 40px; background-size: 40% 40%; font-size: 40px; color: green\'></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n" +
+                "      <i class=\"fas fa-window-close\" role=\'button\' onclick=\"Booking.cancelEdit()\" title='\Cancel\' " +
+                "style=\'width: 40px; height: 40px; background-size: 40% 40%; font-size: 40px; color: red\'></i>\n</p>"
+            );
+
+            document.getElementById('update-appointment-details').scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+                inline: "nearest"
+            });
+
+            $("#saveButton-editAppointment").on("click", function () {
+                Booking.updateAppointment(appointmentId);
+                alert("Appointment with id " + appointmentId + " was updated!");
+            });
         })
-    }
+    },
+
+    cancelEdit: function () {
+        location.reload(true);
+        document.forms["symptoms-editSection", "diagnostic-editSection", "treatment-editSection", "recommendations"].reset();
+    },
 };
 
 Booking.getAppointments();
