@@ -38,38 +38,87 @@ window.Messages = {
     },
 
     getMessages: function () {
-
-        let patientId = sessionStorage.getItem("loggedUserId");
         userIsLoggedIn = sessionStorage.getItem("userIsLoggedIn");
+        loggedUserIsDoctor = sessionStorage.getItem("loggedUserIsDoctor");
 
-        $.ajax({
-            url: Messages.API_BASE_URL + "/patientId=" + patientId
-        }).done(function (response) {
-            console.log(response);
-            let displayContent = response.content;
-            displayContent = displayContent.sort(postMessage);
+        if (userIsLoggedIn) {
+            if (loggedUserIsDoctor == 'false') {
+                let patientId = sessionStorage.getItem("loggedUserId");
+                userIsLoggedIn = sessionStorage.getItem("userIsLoggedIn");
 
-            Messages.displayMessages(displayContent.reverse());
-        })
-    }
-    ,
+                $.ajax({
+                    url: Messages.API_BASE_URL + "/patientId=" + patientId
+                }).done(function (response) {
+                    console.log(response);
+                    let displayContent = response.content;
+                    displayContent = displayContent.sort(postMessage);
+
+                    Messages.displayMessages(displayContent.reverse());
+                })
+            } else {
+                let doctorId = 1;
+
+                $.ajax({
+                    url: Messages.API_BASE_URL + "/doctorId=" + doctorId
+                }).done(function (response) {
+
+                    let patientsIds = [];
+
+                    for (let i = 0; i < response.content.length; i++) {
+                        patientsIds[i] = response.content[i].patientId;
+                    }
+
+                    let uniqueId = [];
+                    $.each(patientsIds, function (i, el) {
+                        if ($.inArray(el, uniqueId) === -1) uniqueId.push(el);
+                    });
+
+                    console.log(uniqueId);
+
+                    let patientsNames = [];
+
+                    for (let i = 0; i < uniqueId.length; i++) {
+                        $.ajax({
+                            url: "http://localhost:8084/patients/" + uniqueId[i]
+                        }).done(function (patient) {
+                            patientsNames[i] = (patient.firstName + " " + patient.lastName);
+                        })
+                    }
+
+                    console.log(patientsNames);
+                    let htmlNames = '';
+
+                    //aici nu ii bine
+                    patientsNames.forEach(patient => htmlNames += Messages.getHtmlTableWithPatientsName(patient));
+                    $('.messages-new-class').html(htmlNames);
+                })
+            }
+        }
+    },
+
+    getHtmlTableWithPatientsName: function (patient) {
+        return `<div class="container-chat">
+                     <img src="img/icon/icon-6.png" alt="Avatar">
+                     <p>${patient}</p>
+                </div>`
+    },
 
     displayMessages: function (messages) {
         let messagesHtml = '';
 
-        function messageContent(message) {
-            let messageSent = Messages.getHtmlForMessageSent(message);
-            let messageReceived = '';
-            if (message.messageReceived.length > 0) {
-                messageReceived = Messages.getHtmlForMessageReceived(message);
+            function messageContent(message) {
+                let messageSent = Messages.getHtmlForMessageSent(message);
+                let messageReceived = '';
+                if (message.messageReceived.length > 0) {
+                    messageReceived = Messages.getHtmlForMessageReceived(message);
+                }
+
+                if (messageReceived.length === 0) {
+                    messagesHtml += messageSent;
+                } else messagesHtml += messageReceived + messageSent;
             }
 
-            if (messageReceived.length === 0) {
-                messagesHtml += messageSent;
-            } else messagesHtml += messageReceived + messageSent;
-        }
-
-        messages.forEach(message => messageContent(message));
+            messages.forEach(message => messageContent(message));
 
         $('.messages-new-class').html(messagesHtml);
     },
