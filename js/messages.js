@@ -73,24 +73,22 @@ window.Messages = {
                         if ($.inArray(el, uniqueId) === -1) uniqueId.push(el);
                     });
 
-                    console.log(uniqueId);
+                    uniqueId.reverse();
 
                     let patientsNames = [];
 
+                    console.log(patientsNames);
                     for (let i = 0; i < uniqueId.length; i++) {
                         $.ajax({
                             url: "http://localhost:8084/patients/" + uniqueId[i]
                         }).done(function (patient) {
-                            patientsNames[i] = (patient.firstName + " " + patient.lastName);
+                            patientsNames.push(patient.firstName + " " + patient.lastName);
+
+                            let htmlNames = '';
+                            patientsNames.forEach(patient => htmlNames += Messages.getHtmlTableWithPatientsName(patient));
+                            $('.messages-new-class').html(htmlNames);
                         })
                     }
-
-                    console.log(patientsNames);
-                    let htmlNames = '';
-
-                    //aici nu ii bine
-                    patientsNames.forEach(patient => htmlNames += Messages.getHtmlTableWithPatientsName(patient));
-                    $('.messages-new-class').html(htmlNames);
                 })
             }
         }
