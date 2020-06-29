@@ -95,28 +95,47 @@ window.Messages = {
     },
 
     getHtmlTableWithPatientsName: function (patient) {
+
+        console.log(patient);
+
         return `<div class="container-chat">
                      <img src="img/icon/icon-6.png" alt="Avatar">
                      <p>${patient}</p>
-                </div>`
+                     <button type="button" class="open-messages" onclick="Messages.openMessagesWithOnePatient(62)">Open messages with patient ${patient}</button>
+                </div>`;
+    },
+
+    openMessagesWithOnePatient: function (patient) {
+
+        console.log(patient);
+
+        $.ajax({
+            url: Messages.API_BASE_URL + "/patientId=" + patient
+        }).done(function (response) {
+            console.log(response);
+            let displayContent = response.content;
+            displayContent = displayContent.sort(postMessage);
+
+            Messages.displayMessages(displayContent.reverse());
+        })
     },
 
     displayMessages: function (messages) {
         let messagesHtml = '';
 
-            function messageContent(message) {
-                let messageSent = Messages.getHtmlForMessageSent(message);
-                let messageReceived = '';
-                if (message.messageReceived.length > 0) {
-                    messageReceived = Messages.getHtmlForMessageReceived(message);
-                }
-
-                if (messageReceived.length === 0) {
-                    messagesHtml += messageSent;
-                } else messagesHtml += messageReceived + messageSent;
+        function messageContent(message) {
+            let messageSent = Messages.getHtmlForMessageSent(message);
+            let messageReceived = '';
+            if (message.messageReceived.length > 0) {
+                messageReceived = Messages.getHtmlForMessageReceived(message);
             }
 
-            messages.forEach(message => messageContent(message));
+            if (messageReceived.length === 0) {
+                messagesHtml += messageSent;
+            } else messagesHtml += messageReceived + messageSent;
+        }
+
+        messages.forEach(message => messageContent(message));
 
         $('.messages-new-class').html(messagesHtml);
     },
